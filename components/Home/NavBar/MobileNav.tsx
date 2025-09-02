@@ -1,13 +1,25 @@
 import { NAV_LINKS } from "@/constants/constant";
 import Link from "next/link";
 import React from "react";
+import { CgClose } from "react-icons/cg";
 
-const MobileNav = () => {
+type Props = {
+  showNav: boolean;
+  closeNav: () => void;
+};
+
+const MobileNav = ({ closeNav, showNav }: Props) => {
+  const navOpen = showNav ? "translate-x-0" : "translate-x-[-100%]";
   return (
     <div>
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black bg-opactity-70 transform transition-all duration-500 z-[1002] w-full h-screen"></div>
-      <div className="text-white fixed flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-rose-700 space-y-6 z-[1050] transform transition-all duration-500 delay-300">
+      <div
+        className={`fixed ${navOpen} inset-0 bg-black bg-opacity-70 transform transition-all duration-500 z-[1002] w-full h-screen`}
+      ></div>
+      {/* Nav link */}
+      <div
+        className={`text-white ${navOpen} fixed justify-center flex flex-col h-full w-[80%] sm:w-[60%] bg-rose-700 space-y-6 z-[1050] transform transition-all duration-500 delay-300`}
+      >
         {NAV_LINKS.map((link) => {
           return (
             <Link href={link.url} key={link.id}>
@@ -17,6 +29,11 @@ const MobileNav = () => {
             </Link>
           );
         })}
+        {/* close button */}
+        <CgClose
+          onClick={closeNav}
+          className=" absolute top-[0.7rem] right-[1.4rem] sm:h-8 w-6 h-6"
+        />
       </div>
     </div>
   );
