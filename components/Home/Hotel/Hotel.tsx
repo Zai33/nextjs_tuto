@@ -10,9 +10,14 @@ const Hotel = () => {
       <SectionHeading heading="Recommended Hotels" subHeading="hello world" />
       <div className=" w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-center mt-16">
         {/* Hotel cords */}
-        {hotelsData.map((item) => {
+        {hotelsData.map((item, i) => {
           return (
-            <div key={item.id}>
+            <div
+              key={item.id}
+              data-aos="fade-right"
+              data-aos-anchor-placement="top-center"
+              data-aos-delay={i * 100}
+            >
               <HotelCard hotel={item} />
             </div>
           );
